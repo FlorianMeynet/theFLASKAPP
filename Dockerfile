@@ -1,8 +1,10 @@
 FROM python:latest
+
+RUN mkdir /code
 WORKDIR /code
 
 
-COPY requirements.txt requirements.txt
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 ENV FLASK_APP=app.py
@@ -18,4 +20,4 @@ EXPOSE 5000
 
 ADD . .
 
-CMD ["python", "app.py", "runserver", "--hosty=0.0.0.0", "--threaded"]
+CMD ["python", "app.py", "runserver", "--host=0.0.0.0", "--threaded"]

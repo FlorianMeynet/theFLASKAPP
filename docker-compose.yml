@@ -1,23 +1,24 @@
 version: "3.8"
 services:
-  flaskapp:
-    build: .
-  
-    image : "flaskimage:latest"
-    ports:
-      - "5001:5000"
-    depends_on:
-      - "database"
 
-  database:
+  db:
     image: postgres
+
     environment:
-      - POSTGRES_DB=database
-      - POSTGRES_USER=flo    
-      - POSTGRES_PASSWORD=flo
-      - USE_POSTGRES=True
+      POSTGRES_DB: database
+      POSTGRES_USER: flo    
+      POSTGRES_PASSWORD: password
       
-        
-  
+
+  flaskapp:
+    restart: always
+    build: .
+    
+    
+    ports:
+      - "5000:5000"
+    
+    depends_on:
+      - "db"
     
  
